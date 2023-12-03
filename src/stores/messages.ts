@@ -1,7 +1,4 @@
-import type {
-	ChatCompletionMessage,
-	ChatCompletionMessageParam
-} from 'openai/resources/chat';
+import type { ChatCompletionMessageParam } from 'openai/resources/chat';
 import { writable } from 'svelte/store';
 
 export const messages = writable<ChatCompletionMessageParam[]>([]);

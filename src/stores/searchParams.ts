@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store';
 
-type SearchParams = {
+export type SearchParams = {
 	search_maps: string;
-	max_price: number;
-	route_options: string[];
-	max_time_in_minutes: number;
+	max_price?: number;
+	max_time_in_minutes?: number;
 	description: string;
+	open_now?: boolean;
 };
 
 export const searchParams = writable<SearchParams | undefined>(undefined);

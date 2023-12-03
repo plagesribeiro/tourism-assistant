@@ -29,11 +29,6 @@
 							description:
 								'Número de 1 a 5 que representa o preço máximo que o usuário quer pagar pela atividade. Exemplo: 3.'
 						},
-						route_options: {
-							type: 'string',
-							description:
-								"Array contendo 'walking', 'transit' e/ou 'driving'. sendo 'walking' para caminhada, 'transit' para transporte público e 'driving' para carro. Exemplo: ['walking', 'transit']."
-						},
 						max_time_in_minutes: {
 							type: 'number',
 							description:
@@ -43,6 +38,11 @@
 							type: 'string',
 							description:
 								"Descrição completa da atividade e experiência que o usuário quer fazer. Procure uma frase o mais específica possível com bastante detalhes. Exemplo: 'Quero fazer uma trilha em uma floresta com árvores e locais em que realmente posso me conectar com a natureza'."
+						},
+						open_now: {
+							type: 'boolean',
+							description:
+								'Booleano que representa se o usuário quer que a atividade esteja aberta agora. Exemplo: true.'
 						}
 					},
 					required: ['search_maps', 'description']
@@ -88,7 +88,6 @@
 		});
 
 		const toolCalls = resp.choices[0].message.tool_calls;
-		console.log('TOOL CALL: ', toolCalls);
 
 		if (toolCalls) {
 			addMessage({
@@ -102,9 +101,9 @@
 			setSearchParams({
 				search_maps: argumentsObject.search_maps ?? '',
 				max_price: argumentsObject.max_price ?? 0,
-				route_options: argumentsObject.route_options ?? [],
 				max_time_in_minutes: argumentsObject.max_time_in_minutes ?? 0,
-				description: argumentsObject.description ?? ''
+				description: argumentsObject.description ?? '',
+				open_now: argumentsObject.open_now ?? false
 			});
 
 			await new Promise((resolve) => setTimeout(resolve, 3500));
@@ -139,9 +138,9 @@
 				{
 					"search_maps": frase curta para pesquisar no google maps. Exemplo: "trilhas", "restaurantes", "parques de diversão"
 					"max_price": Número de 1 a 5 que representa o preço máximo que o usuário quer pagar pela atividade. Exemplo: 3.
-					"route_options": array contendo "walking", "transit" e/ou "driving". sendo "walking" para caminhada, "transit" para transporte público e "driving" para carro. Exemplo: ["walking", "transit"].
 					"max_time_in_minutes": Número inteiro que representa o tempo máximo que o usuário quer gastar em minutos para chegar até o local da atividade. Exemplo: 60.
 					"description": : Descrição completa da atividade e experiência que o usuário quer fazer. Exemplo: "Quero fazer uma trilha em uma floresta com árvores e locais em que realmente posso me conectar com a natureza".
+					"open_now": Booleano que representa se o usuário quer que a atividade esteja aberta agora. Exemplo: true.
 				}.
 				Mas seja discreto ao colher essas informações e não seja muito persistente. Mas peça para o usuário ser o mais específico possível e seja o mais detalhista possível no campo description.
 			`,
