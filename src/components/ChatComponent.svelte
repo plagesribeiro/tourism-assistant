@@ -205,7 +205,7 @@
 			placeholder="Digite aqui"
 			class="input input-bordered w-full"
 			bind:value={inputContent}
-			on:keydown={(e) => {
+			on:keypress={(e) => {
 				if (e.key === 'Enter') {
 					sendMessage();
 				}
