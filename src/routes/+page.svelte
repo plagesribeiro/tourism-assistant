@@ -9,7 +9,9 @@
 
 <svelte:head>
 	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQCicyfslJ818oTe0nX6ZSQnRFGBzc9uI"
+		src={`https://maps.googleapis.com/maps/api/js?key=${
+			import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+		}`}
 	></script>
 </svelte:head>
 
