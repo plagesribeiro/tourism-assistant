@@ -112,7 +112,7 @@
 			class="input input-bordered w-full"
 			bind:value={searchInput}
 			placeholder="Pesquisar endereço..."
-			on:change={searchLocation}
+			on:keydown={searchLocation}
 		/>
 
 		{#if dropdownOptions.length > 0}
